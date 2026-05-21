@@ -1,0 +1,6 @@
+{
+  "name": "AgroMarket",
+  "description": "Mobile-first online B2C marketplace connecting local farmers and buyers, featuring M-Pesa payments, GPS discovery, multi-language support (English and Kiswahili), order tracking, admin controls, and Gemini-powered smart demand forecasting & price prediction.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
