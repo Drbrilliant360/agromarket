@@ -1,33 +1,20 @@
-# THE UNIVERSITY OF DAR ES SALAAM
-## COLLEGE OF INFORMATION AND COMMUNICATION TECHNOLOGIES (CoICT)
-### DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
 
----
-
-# FINAL YEAR PROJECT REPORT
 
 ## AGROMARKET: A MOBILE-FIRST B2B/B2C AGRICULTURAL MARKETPLACE AND INTEGRATED AI CORNERSTONE AGRONOMY PLATFORM FOR EAST AFRICAN SMALLHOLDER FARMERS
 
 ### COURSE CODE: CS 499 (PROJECT II)
 
 **Submitted by:**
-*   **Student Name:** Bryan Kachocho
-*   **Registration Number:** 2022-04-08912
-*   **Email:** bryankachocho17@gmail.com
+* 
 *   **Supervisor:** Dr. M. K. Ndimbwa
 
-**A Project Report Submitted to the Department of Computer Science and Engineering in Partial Fulfillment of the Requirements for the Degree of Bachelor of Science in Computer Science of the University of Dar es Salaam.**
+
 
 **DAR ES SALAAM, TANZANIA**  
 **MAY 2026**
 
 ---
-
-## DECLARATION
-
-I, **Bryan Kachocho**, do hereby declare that this project report entitled *"AgroMarket: A Mobile-First B2B/B2C Agricultural Marketplace and Integrated AI Cornerstone Agronomy Platform for East African Smallholder Farmers"* is my original work and has not been submitted or published elsewhere for any academic award or degree in any other institution of higher learning.
-
-Signature: `Bryan Kachocho`  
+  
 Date: **21st May 2026**
 
 ---
