@@ -6,6 +6,7 @@ import {
 import { Product, Order, Category, Review, OrderStatus, Complaint } from "../types";
 import { CATEGORIES, LANG_DICT } from "../data";
 import DynamicMap from "./DynamicMap";
+import SafeImage from "./SafeImage";
 
 interface BuyerProps {
   products: Product[];
@@ -377,17 +378,16 @@ export default function BuyerDashboard({
       )}
 
       {/* Main Container */}
-      <div className="max-w-lg mx-auto w-full px-4 pt-4 flex-1 pb-20">
+      <div className="max-w-lg mx-auto w-full px-4 pt-4 flex-1 pb-24">
         
         {activeTab === "marketplace" && (
           <div className="space-y-4" id="div-tab-marketplace">
             {/* African Context Marketplace Banner */}
             <div className="relative overflow-hidden rounded-2xl border border-slate-100 shadow-xs h-36 bg-slate-200">
-              <img
+              <SafeImage
                 src="/assets/images/marketplace_banner_1779357863132.png"
                 alt="Vibrant African Open-Air Produce Stall"
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3.5">
                 <div>
@@ -465,7 +465,7 @@ export default function BuyerDashboard({
                       id={`prod-${p.id}`}
                     >
                       <div className="relative">
-                        <img src={p.image} className="w-full h-24 object-cover rounded-xl" alt={p.name} />
+                        <SafeImage src={p.image} className="w-full h-24 object-cover rounded-xl" alt={p.name} />
                         <span className="absolute bottom-1.5 right-1.5 bg-black/65 backdrop-blur-xs text-white text-[9px] font-mono py-0.5 px-1.5 rounded-md font-bold">
                           {p.quantity} {p.unit}
                         </span>
@@ -516,7 +516,7 @@ export default function BuyerDashboard({
                 </button>
               </div>
 
-              <img src={selectedProduct.image} className="w-full h-44 object-cover rounded-2xl" alt={selectedProduct.name} />
+              <SafeImage src={selectedProduct.image} className="w-full h-44 object-cover rounded-2xl" alt={selectedProduct.name} />
 
               <div className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-2xl">
                 <span className="font-bold text-slate-800 block mb-1">Description</span>
@@ -660,7 +660,7 @@ export default function BuyerDashboard({
                 <div className="space-y-2">
                   {cart.map((item) => (
                     <div key={item.product.id} className="bg-white border text-slate-950 border-slate-100 rounded-2xl p-3 flex gap-3 shadow-xs items-center">
-                      <img src={item.product.image} className="w-14 h-14 object-cover rounded-xl" alt={item.product.name} />
+                      <SafeImage src={item.product.image} className="w-14 h-14 object-cover rounded-xl" alt={item.product.name} />
                       <div className="flex-grow min-w-0">
                         <span className="font-bold text-slate-900 block truncate text-xs">{item.product.name}</span>
                         <span className="text-[10px] text-slate-400 block mb-1">Farmer: {item.product.farmerName}</span>
@@ -825,7 +825,7 @@ export default function BuyerDashboard({
                     </div>
 
                     <div className="flex gap-3">
-                      <img src={o.productImage} className="w-12 h-12 rounded-lg object-cover shrink-0" alt={o.productName} />
+                      <SafeImage src={o.productImage} className="w-12 h-12 rounded-lg object-cover shrink-0" alt={o.productName} />
                       <div className="min-w-0 flex-1">
                         <span className="font-bold text-slate-800 truncate block text-sm">{o.productName}</span>
                         <span className="text-slate-500 block text-[11px] mt-0.5">Seller Name: {o.farmerName}</span>
@@ -943,45 +943,69 @@ export default function BuyerDashboard({
         )}
       </div>
 
-      {/* Mobile Sticky Footer Nav */}
-      <div className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-2 flex justify-around items-center z-40 max-w-lg mx-auto">
+      {/* Mobile Floating Pill Footer Nav */}
+      <div className="fixed bottom-3 inset-x-3 bg-white/95 backdrop-blur-md border border-slate-150 rounded-2xl py-2 px-3 flex justify-around items-center z-45 max-w-sm mx-auto shadow-lg ring-1 ring-black/5 animate-fade-in">
         <button
           onClick={() => setActiveTab("marketplace")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "marketplace" ? "text-emerald-700" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "marketplace" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <Search className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "Soko" : "Market"}</span>
+          <Search className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "marketplace" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Soko" : "Market"}</span>
+          {activeTab === "marketplace" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("basket")}
-          className={`flex flex-col items-center p-1 cursor-pointer relative ${activeTab === "basket" ? "text-emerald-700" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-all active:scale-95 duration-100 flex-1 relative ${
+            activeTab === "basket" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
           <div className="relative">
-            <ShoppingBasket className="w-4 h-4" />
+            <ShoppingBasket className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "basket" ? "scale-110 text-emerald-800" : ""}`} />
             {cart.length > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full text-[7px] w-3.5 h-3.5 flex items-center justify-center font-bold">
+              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full text-[8px] w-4 h-4 flex items-center justify-center font-bold">
                 {cart.length}
               </span>
             )}
           </div>
-          <span className="text-[9px] mt-0.5">{isSw ? "Sufuria" : "Basket"}</span>
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Sufuria" : "Basket"}</span>
+          {activeTab === "basket" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("orders")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "orders" ? "text-emerald-700" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "orders" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <Smartphone className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "Maagizo" : "Orders"}</span>
+          <Smartphone className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "orders" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Maagizo" : "Orders"}</span>
+          {activeTab === "orders" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("complaints")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "complaints" ? "text-emerald-700" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "complaints" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <FileText className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "Mzozo" : "Dispute"}</span>
+          <FileText className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "complaints" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Mzozo" : "Dispute"}</span>
+          {activeTab === "complaints" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
       </div>
     </div>

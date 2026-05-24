@@ -38,6 +38,9 @@ export default function App() {
           if (p.id === "p1" && (!p.image || p.image.includes("unsplash.com") || p.image === "")) {
             return { ...p, image: "/assets/images/premium_maize_cobs_1779359037477.png" };
           }
+          if (p.id === "p5" && (!p.image || p.image.includes("unsplash.com") || p.image === "")) {
+            return { ...p, image: "/assets/images/sweet_potatoes_1779398871769.png" };
+          }
           return p;
         });
       } catch (e) {
@@ -55,6 +58,9 @@ export default function App() {
         return parsed.map(o => {
           if (o.productId === "p1" && (!o.productImage || o.productImage.includes("unsplash.com") || o.productImage === "")) {
             return { ...o, productImage: "/assets/images/premium_maize_cobs_1779359037477.png" };
+          }
+          if (o.productId === "p5" && (!o.productImage || o.productImage.includes("unsplash.com") || o.productImage === "")) {
+            return { ...o, productImage: "/assets/images/sweet_potatoes_1779398871769.png" };
           }
           return o;
         });

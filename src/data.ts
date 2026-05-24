@@ -87,7 +87,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     harvestDate: "2026-05-18",
     deliveryOptions: "both",
     stockStatus: "low-stock",
-    image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&q=80&w=600",
+    image: "/assets/images/sweet_potatoes_1779398871769.png",
     farmerId: "f2",
     farmerName: "Amina Juma",
     farmerPhone: "+255 655 890 123",

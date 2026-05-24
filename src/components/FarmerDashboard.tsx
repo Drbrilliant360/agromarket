@@ -7,6 +7,7 @@ import {
 import { Product, Order, Category, FarmerEarnings } from "../types";
 import { CATEGORIES, LANG_DICT } from "../data";
 import DynamicMap from "./DynamicMap";
+import SafeImage from "./SafeImage";
 
 interface FarmerProps {
   products: Product[];
@@ -337,15 +338,14 @@ export default function FarmerDashboard({
       </div>
 
       {/* Quick Dashboard Action Cards */}
-      <div className="max-w-lg mx-auto w-full px-4 pt-4 flex-1 pb-20">
+      <div className="max-w-lg mx-auto w-full px-4 pt-4 flex-1 pb-24">
         {/* Dynamic Farmer Profile Card */}
         <div className="bg-white border border-slate-100 rounded-2xl p-4 shadow-xs flex items-center gap-4 mb-4">
           <div className="relative">
-            <img
+            <SafeImage
               src="/assets/images/african_farmer_avatar_1779357840679.png"
               alt={farmerName}
               className="w-14 h-14 rounded-full object-cover border-2 border-emerald-500"
-              referrerPolicy="no-referrer"
             />
             <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">
               ✓
@@ -606,7 +606,7 @@ export default function FarmerDashboard({
                   const matchingCategory = CATEGORIES.find(c => c.id === p.category);
                   return (
                     <div key={p.id} className="bg-white border text-slate-800 border-slate-100 rounded-2xl p-4 flex gap-3 shadow-xs relative" id={`prod-card-${p.id}`}>
-                      <img src={p.image} className="w-16 h-16 rounded-xl object-cover border border-slate-100 shrink-0" alt={p.name} />
+                      <SafeImage src={p.image} className="w-16 h-16 rounded-xl object-cover border border-slate-100 shrink-0" alt={p.name} />
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start gap-1">
                           <h4 className="text-sm font-bold text-slate-900 truncate leading-snug">{p.name}</h4>
@@ -864,7 +864,7 @@ export default function FarmerDashboard({
                     </div>
 
                     <div className="flex gap-3">
-                      <img src={o.productImage} className="w-12 h-12 rounded-lg object-cover shrink-0" alt={o.productName} />
+                      <SafeImage src={o.productImage} className="w-12 h-12 rounded-lg object-cover shrink-0" alt={o.productName} />
                       <div className="min-w-0 flex-1">
                         <span className="font-medium text-slate-800 text-sm block truncate">{o.productName}</span>
                         <div className="flex justify-between mt-1 text-slate-500 text-[11px]">
@@ -1080,11 +1080,10 @@ export default function FarmerDashboard({
           <div className="space-y-4" id="div-tab-insights">
             {/* African Context AI Agronomy Banner */}
             <div className="relative overflow-hidden rounded-2xl h-44 shadow-xs bg-emerald-950 flex flex-col justify-end p-5">
-              <img
+              <SafeImage
                 src="/assets/images/agronomy_assistant_1779357884464.png"
                 alt="AI Agronomy Concept"
                 className="absolute inset-0 w-full h-full object-cover opacity-40"
-                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/70 to-transparent" />
               <div className="relative z-10 space-y-1">
@@ -1377,53 +1376,83 @@ export default function FarmerDashboard({
         )}
       </div>
 
-      {/* Mobile-style bottom bar navigation for dashboard */}
-      <div className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-2 flex justify-around items-center z-40 max-w-lg mx-auto">
+      {/* Mobile Floating Pill Footer Nav */}
+      <div className="fixed bottom-3 inset-x-3 bg-white/95 backdrop-blur-md border border-slate-150 rounded-2xl py-2 px-2.5 flex justify-around items-center z-45 max-w-sm mx-auto shadow-lg ring-1 ring-black/5 animate-fade-in">
         <button
           onClick={() => setActiveTab("inventory")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "inventory" ? "text-emerald-600" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "inventory" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <Package className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "Hazina" : "Inventory"}</span>
+          <Package className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "inventory" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Hazina" : "Inventory"}</span>
+          {activeTab === "inventory" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("add-product")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "add-product" ? "text-emerald-600" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "add-product" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <Plus className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "Panga" : "Publish"}</span>
+          <Plus className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "add-product" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Panga" : "Publish"}</span>
+          {activeTab === "add-product" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("orders")}
-          className={`flex flex-col items-center p-1 cursor-pointer lg:relative ${activeTab === "orders" ? "text-emerald-600" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1 rounded-xl transition-all active:scale-95 duration-100 flex-1 relative ${
+            activeTab === "orders" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
           <div className="relative">
-            <Clock className="w-4 h-4" />
+            <Clock className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "orders" ? "scale-110 text-emerald-800" : ""}`} />
             {pendingOrders.length > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-red-500 rounded-full text-white text-[7px] flex items-center justify-center font-bold">
+              <span className="absolute -top-1.5 -right-1.5 bg-red-400 text-white rounded-full text-[7.5px] w-3.5 h-3.5 flex items-center justify-center font-bold">
                 {pendingOrders.length}
               </span>
             )}
           </div>
-          <span className="text-[9px] mt-0.5">{isSw ? "Maagizo" : "Orders"}</span>
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Maagizo" : "Orders"}</span>
+          {activeTab === "orders" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("insights")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "insights" ? "text-emerald-600" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "insights" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <Sprout className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "AI Ushauri" : "Agri AI"}</span>
+          <Sprout className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "insights" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "AI Ushauri" : "Agri AI"}</span>
+          {activeTab === "insights" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
 
         <button
           onClick={() => setActiveTab("chats")}
-          className={`flex flex-col items-center p-1 cursor-pointer ${activeTab === "chats" ? "text-emerald-600" : "text-slate-400"}`}
+          className={`flex flex-col items-center justify-center p-1 rounded-xl transition-all active:scale-95 duration-100 flex-1 ${
+            activeTab === "chats" ? "text-emerald-800 font-extrabold" : "text-slate-450 hover:text-slate-750"
+          }`}
+          style={{ minHeight: "44px" }}
         >
-          <MessageSquare className="w-4 h-4" />
-          <span className="text-[9px] mt-0.5">{isSw ? "Chats" : "Soga"}</span>
+          <MessageSquare className={`w-[18px] h-[18px] transition-transform duration-200 ${activeTab === "chats" ? "scale-110 text-emerald-800" : ""}`} />
+          <span className="text-[10px] mt-0.5 tracking-tight">{isSw ? "Chats" : "Soga"}</span>
+          {activeTab === "chats" && (
+            <div className="w-1 h-1 bg-emerald-850 rounded-full mt-0.5 animate-pulse" />
+          )}
         </button>
       </div>
     </div>

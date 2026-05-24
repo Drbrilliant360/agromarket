@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { Product, Order, Complaint } from "../types";
 import DynamicMap from "./DynamicMap";
+import SafeImage from "./SafeImage";
 
 interface AdminProps {
   products: Product[];
@@ -888,7 +889,7 @@ export default function AdminDashboard({
               <span className="font-bold text-xs text-zinc-300 block mb-2 font-mono">Active Platform Catalog Listings:</span>
               {products.map((p) => (
                 <div key={p.id} className="bg-zinc-950 border border-zinc-850 p-3 rounded-xl flex gap-3 text-xs animate-fade-in" id={`p-admin-card-${p.id}`}>
-                  <img src={p.image} className="w-14 h-14 rounded-lg object-cover border border-zinc-800 shrink-0" alt="" />
+                  <SafeImage src={p.image} className="w-14 h-14 rounded-lg object-cover border border-zinc-800 shrink-0" alt="" />
                   <div className="flex-1 min-w-0 flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-start gap-1">
